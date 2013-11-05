@@ -2,7 +2,7 @@
  *	README file voor INF1++ groep
  */
 
-1) clone repo (is al gelukt anders zag je dit niet)
+1) clone repo (is al gelukt anders zag je dit niet: git clone scheme@server.daanvanhasselt.com:scheme)
 2) maak eigen branch (git checkout -b voornaam.achternaam)
 3) maak een bestand aan met wat text ofzo
 4) voeg het bestand toe aan de repository (git add bestandsnaam)
