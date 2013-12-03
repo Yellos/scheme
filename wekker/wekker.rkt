@@ -1,0 +1,46 @@
+#lang racket
+
+(require racket/gui/base)
+
+(define (speel audiofile)
+ (play-sound audiofile #t))
+
+(define (uur)      (date-hour   (seconds->date (current-seconds))) )
+(define (minuten)  (date-minute (seconds->date (current-seconds))) )
+(define (seconden) (date-second (seconds->date (current-seconds))) )
+
+(define (display-tijd uren minuten seconden)
+  (begin (display uren) (display ":") (display minuten) (display ":") (displayln seconden)) )
+
+(define (nu) (display-tijd (uur) (minuten) (seconden)))
+
+(define (stelwekkerin)
+  (let ((h -1) (m -1) (s -1))
+    (begin 
+      (display "UUR:")      (set! h (read-line)) 
+      (display "MINUTEN:")  (set! m (read-line))
+      (display "SECONDEN:") (set! s (read-line))
+      (display "Wekker ingesteld op ")
+      (display-tijd h m s)
+      (display "Het is nu ")
+      (displayln (nu))
+      (wacht (string->number h) (string->number m) (string->number s))
+     )
+   )
+)
+
+(define (wacht h m s)
+      (if (equal? (uur) h)
+          (if (equal? (minuten) m)
+              (if (equal? (seconden) s)
+                  (begin (speel "alarm.wav") (stelwekkerin))
+                  (begin (sleep 1) (wacht h m s))
+              )
+              (begin (sleep 1) (wacht h m s))
+          )
+          (begin (sleep 1) (wacht h m s))
+      )
+)
+
+(nu)
+(stelwekkerin)
